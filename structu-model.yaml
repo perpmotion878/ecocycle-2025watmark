@@ -1,0 +1,7 @@
+ecocycle/
+├── __init__.py
+├── sensors.py          # Simulated IoT sensors (weight, fill-level, camera)
+├── ml_model.py         # Mock ML waste classification model
+├── microcontroller.py  # ARM Cortex-M4 resource simulator
+├── waste_sorter.py     # Main sorting logic
+└── test_ecocycle.py    # Comprehensive tests using unittest.mock
