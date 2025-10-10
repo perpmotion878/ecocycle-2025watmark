@@ -9,13 +9,30 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Conv2D(16, 3, activation='relu'),
     tf.keras.layers.MaxPooling2D(),
     tf.keras.layers.Conv2D(32, 3, activation='relu'),
-    tf.keras.layers.MaxPooling2D(),
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(32, activation='relu'),
-    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.MaxPooling2D()
     tf.keras.layers.Dense(2, activation='softmax')  # 2 output classes
 ])
 
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
+
+---
+import faulthandler
+import signal
+
+# List of signals for which to disable faulthandler breakpoints
+signals_to_disable = [
+    signal.SIGINT,   # Interrupt from keyboard (Ctrl+C)
+    signal.SIGUSR1,  # User-defined signal 1
+    signal.SIGUSR2,  # User-defined signal 2
+    signal.SIGXFSZ   # File size limit exceeded
+]
+
+# Disable faulthandler for the specified signals
+for sig in signals_to_disable:
+    try:
+        faulthandler.disable(sig)
+        print(f"faulthandler disabled for signal: {sig.name}")
+    except (AttributeError, RuntimeError, ValueError) as e:
+        print(f"Could not disable faulthandler for {sig}: {e}")
