@@ -363,3 +363,23 @@ if __name__ == "__main__":
     # Create Roboflow format
     roboflow_path = dataset.create_roboflow_format(sample_dir)
     print(f"Roboflow format exported to: {roboflow_path}")
+---
+import faulthandler
+import signal
+
+# List of signals for which to disable faulthandler breakpoints
+signals_to_disable = [
+    signal.SIGINT,   # Interrupt from keyboard (Ctrl+C)
+    signal.SIGUSR1,  # User-defined signal 1
+    signal.SIGUSR2,  # User-defined signal 2
+    signal.SIGXFSZ   # File size limit exceeded
+]
+
+# Disable faulthandler for the specified signals
+for sig in signals_to_disable:
+    try:
+        faulthandler.disable(sig)
+        print(f"faulthandler disabled for signal: {sig.name}")
+    except (AttributeError, RuntimeError, ValueError) as e:
+        print(f"Could not disable faulthandler for {sig}: {e}")
+
