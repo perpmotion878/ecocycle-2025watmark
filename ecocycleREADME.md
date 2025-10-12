@@ -133,4 +133,3 @@ This simulation demonstrates how IoT technology can revolutionize waste manageme
 
 ---
 
-*Ready to explore the future of smart waste management? Start with `python ecocycle_demo.py` and watch the magic happen in your terminal.*
